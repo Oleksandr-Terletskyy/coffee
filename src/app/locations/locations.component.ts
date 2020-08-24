@@ -10,11 +10,12 @@ import { LocationService } from '../shared/services/location.service';
 })
 export class LocationsComponent implements OnInit {
   selectedLocation: Location;
+  
 
-  constructor() { }
+  constructor( private LocationService:LocationService) { }
 
   ngOnInit() {
-  
+   
   }
 
 }

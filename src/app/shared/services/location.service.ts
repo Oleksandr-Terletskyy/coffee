@@ -1,16 +1,35 @@
-import { Location } from '../../locations.model'
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Location } from '../../locations.model';
+import { Subject } from 'rxjs';
 
+@Injectable({
+    providedIn: 'root'
+})
 export class LocationService {
-      private locations: Location[] = [
-        new Location('542 Feathers Hooves Drive, New York', '111Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis blanditiis laudantium, earum, odit facere consectetur molestiae nobis ratione possimus a natus mollitia laboriosam! Voluptatem culpa necessitatibus, tenetur placeat eaque est?'),
-        new Location('831 Devils Hill Road, Jackson', '222 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis blanditiis laudantium, earum, odit facere consectetur molestiae nobis ratione possimus a natus mollitia laboriosam! Voluptatem culpa necessitatibus, tenetur placeat eaque est?'),
-        new Location('2263 Better Street, Kansas City', '3333 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis blanditiis laudantium, earum, odit facere consectetur molestiae nobis ratione possimus a natus mollitia laboriosam! Voluptatem culpa necessitatibus, tenetur placeat eaque est?'),
-    ]
+    locationsChanged = new Subject<Location[]>();
+
+    locations: Location[] = []
+    constructor(private http: HttpClient) {
+    }
+
     getLocations() {
-        return this.locations.slice()
+        return this.locations.slice();
     }
 
     getlocation(index: number) {
         return this.locations[index];
+    }
+    fetchLocations() {
+        this.http.get<Location[]>('https://coffee-66be5.firebaseio.com/locations.json')
+            .subscribe(locations => {
+                this.setLocations(locations)
+            })
+        return this.locations.slice();
+    }
+    setLocations(locations: Location[]) {
+        this.locations = locations;
+        this.locationsChanged.next(this.locations.slice())
+
     }
 }

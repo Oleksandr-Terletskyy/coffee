@@ -9,12 +9,16 @@ import { LocationService } from '../shared/services/location.service';
 })
 export class LocationsListComponent implements OnInit {
 
-  locations: Location[] = [ ]
-  
-  constructor(private LocationService:LocationService) { }
+  locations: Location[] = []
+
+  constructor(private LocationService: LocationService) { }
 
   ngOnInit() {
-    this.locations= this.LocationService.getLocations()
+    this.LocationService.fetchLocations()
+   
+    setTimeout(() => {
+      this.locations = this.LocationService.getLocations();
+    }, 500);
   }
-  
+
 }

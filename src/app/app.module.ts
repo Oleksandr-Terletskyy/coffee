@@ -1,6 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFireStorageModule } from '@angular/fire/storage';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -14,6 +21,7 @@ import { LocationsListComponent } from './locations-list/locations-list.componen
 import { LocationDetailsComponent } from './location-details/location-details.component';
 import { LocationItemComponent } from './location-item/location-item.component';
 import { LocationStartComponent } from './location-start/location-start.component'
+import { LocationService } from './shared/services/location.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +31,8 @@ import { LocationStartComponent } from './location-start/location-start.componen
     LocationsListComponent,
     LocationDetailsComponent,
     LocationItemComponent,
-    LocationStartComponent
+    LocationStartComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -31,9 +40,10 @@ import { LocationStartComponent } from './location-start/location-start.componen
     BrowserAnimationsModule,
     MatSliderModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
