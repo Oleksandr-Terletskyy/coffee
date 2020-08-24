@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: flex-end;
     h1 {
-        width:46%;
+        width: 46%;
         font-family: Open Sans;
         font-style: normal;
         font-weight: bold;
@@ -21,13 +21,11 @@
 .coffee-info {
     padding: 120px 0;
     .container {
-        // border: 1px solid red;
         margin: 0 auto;
         width: 80%;
         display: flex;
         justify-content: space-between;
         .icon-item {
-            // border: 1px solid green;
             display: flex;
             flex-direction: column;
             align-items: center;

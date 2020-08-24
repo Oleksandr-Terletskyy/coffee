@@ -8,12 +8,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
-import { MainInfoComponent } from './main-info/main-info.component'
+import { MainInfoComponent } from './main-info/main-info.component';
+import { LocationsComponent } from './locations/locations.component';
+import { LocationsListComponent } from './locations-list/locations-list.component';
+import { LocationDetailsComponent } from './location-details/location-details.component';
+import { LocationItemComponent } from './location-item/location-item.component';
+import { LocationStartComponent } from './location-start/location-start.component'
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MainInfoComponent
+    MainInfoComponent,
+    LocationsComponent,
+    LocationsListComponent,
+    LocationDetailsComponent,
+    LocationItemComponent,
+    LocationStartComponent
   ],
   imports: [
     BrowserModule,
