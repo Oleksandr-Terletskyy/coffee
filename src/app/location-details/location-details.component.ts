@@ -9,18 +9,24 @@ import { LocationService } from '../shared/services/location.service';
   styleUrls: ['./location-details.component.scss']
 })
 export class LocationDetailsComponent implements OnInit {
-  location: Location;
+  // location: Location[];
+  location: Location[];
   id: number;
-  constructor(private route: ActivatedRoute,private locationService:LocationService) { }
+  
+  constructor(private route: ActivatedRoute, private locationService: LocationService,
+) { }
 
   ngOnInit() {
+    
     this.route.params
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
-          this.location = this.locationService.getlocation(this.id)
+          this.location = this.locationService.getLocation(this.id)
         }
       )
+
+
   }
 
 }

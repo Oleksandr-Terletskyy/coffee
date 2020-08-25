@@ -1,35 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import { Location } from '../../locations.model';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LocationService {
-    locationsChanged = new Subject<Location[]>();
+    // locationsChanged = new Subject<Location[]>();
+    // locations: Location[] = [];
+    locations: Observable<any[]>
+    itemsCollection: AngularFirestoreCollection<Location[]>;
 
-    locations: Location[] = []
-    constructor(private http: HttpClient) {
+    constructor(public afs: AngularFirestore) {
+        this.locations = afs.collection('locations').valueChanges()
+
     }
-
     getLocations() {
-        return this.locations.slice();
+        return this.locations
     }
 
-    getlocation(index: number) {
-        return this.locations[index];
+    getLocation(index: number){
+        console.log(index)
+        return this.locations[index]
+        // console.log(this.locations)
     }
-    fetchLocations() {
-        this.http.get<Location[]>('https://coffee-66be5.firebaseio.com/locations.json')
-            .subscribe(locations => {
-                this.setLocations(locations)
-            })
-        return this.locations.slice();
-    }
-    setLocations(locations: Location[]) {
-        this.locations = locations;
-        this.locationsChanged.next(this.locations.slice())
+    
 
-    }
 }

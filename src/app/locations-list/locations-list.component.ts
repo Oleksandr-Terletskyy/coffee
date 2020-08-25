@@ -1,6 +1,7 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '../../app/locations.model'
 import { LocationService } from '../shared/services/location.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-locations-list',
@@ -14,11 +15,14 @@ export class LocationsListComponent implements OnInit {
   constructor(private LocationService: LocationService) { }
 
   ngOnInit() {
-    this.LocationService.fetchLocations()
-   
-    setTimeout(() => {
-      this.locations = this.LocationService.getLocations();
-    }, 500);
+    this.LocationService.getLocations().subscribe(locations => {
+      this.locations = locations
+      console.log(locations)
+    })
+
   }
+ 
+
+
 
 }
