@@ -8,24 +8,23 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
     providedIn: 'root'
 })
 export class LocationService {
-    // locationsChanged = new Subject<Location[]>();
-    // locations: Location[] = [];
-    locations: Observable<any[]>
     itemsCollection: AngularFirestoreCollection<Location[]>;
 
     constructor(public afs: AngularFirestore) {
-        this.locations = afs.collection('locations').valueChanges()
 
     }
+
+    locations = this.afs.collection<Location>('locations').valueChanges({ idField: 'id' });
+
     getLocations() {
         return this.locations
     }
 
-    getLocation(index: number){
+    getLocation(index: number) {
         console.log(index)
         return this.locations[index]
         // console.log(this.locations)
     }
-    
+
 
 }

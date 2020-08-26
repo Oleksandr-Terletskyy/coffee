@@ -1,6 +1,6 @@
 <div class="container">
     <app-location-item
-    *ngFor="let locationEl of locations;let i=index;"
+    *ngFor="let locationEl of locationService.locations | async;let i=index;"
     [location]="locationEl" [index]="i"
     >
     </app-location-item>
